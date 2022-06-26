@@ -1,3 +1,12 @@
-body{
-    margin: 0;
+// os 설정에 다크모드이면 실행되는 mixin
+@mixin osDarkmode {
+    @media (prefers-color-scheme : dark) {
+        @content;
+    }
+}
+// os 설정상 애니메이션을 꺼놓는 상태이면 실행됨.
+@mixin noAnimation {
+    @media (prefers-reduced-motion) {
+        @content;
+    }
 }

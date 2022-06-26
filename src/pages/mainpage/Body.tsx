@@ -1,7 +1,7 @@
 import { RootState } from "../../service/AuthStore";
 import { useSelector } from 'react-redux'
 import { GoogleLoginButton, LogoutButton } from './../../service/Auth';
-import "./Body.scss";
+import Sidebar from "./Sidebar";
 
 function Body() {
     const user = useSelector((state: RootState) => state.user);
@@ -14,8 +14,7 @@ function Body() {
                 <LogoutButton />
                 <GoogleLoginButton />
             </div>
-            <div className="main-sidebar">
-            </div>
+            <Sidebar/>
         </div>
     );
 }

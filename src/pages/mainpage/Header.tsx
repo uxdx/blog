@@ -1,9 +1,7 @@
-import './Header.scss';
-
 function Header() {
     return (
         <>
-            <header className="main-header">
+            <header className="main-header elevation-12">
 
             </header>
         </>

@@ -4,11 +4,9 @@ import './App.scss';
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path='/' element={<MainPage/>} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path='/' element={<MainPage/>} />
+    </Routes>
   );
 }
 
