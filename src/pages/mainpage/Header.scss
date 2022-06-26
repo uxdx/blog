@@ -1,0 +1,10 @@
+@import "Variables.scss";
+
+.main-header{
+    z-index: 1;
+    height: $header-height;
+    width: 100%;
+    position: fixed;
+    background-color: $surface;
+    color: $on-surface;
+}

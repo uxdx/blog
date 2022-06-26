@@ -1,0 +1,31 @@
+$header-height: 65px;
+$sidebar-width: 240px;
+
+$sidebar-left-position: false;
+
+$background: #121212;
+$surface: #20232a;
+$sidebar: #1f1b24;
+$primary: #fcb8ab;
+$secondary: #feeae6;
+$on-background: #ddd;
+$on-surface: #eee;
+$on-sidebar: #efefef;
+// $on-primary;
+// $on-secondary: ;
+
+
+$desktop: 1024px;
+$mobile: 767px;
+/*반응형, 브라우저 크기가 1024px 이상일때*/
+@mixin desktop {
+    @media (min-width: $desktop) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: $mobile) {
+        @content;
+    }
+}
