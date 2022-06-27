@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { updateUser, resetUser } from "./AuthStore";
@@ -15,7 +14,7 @@ function getCurrentUser() {
 function GoogleLoginButton() {
     const dispatch = useDispatch();
     return (
-        <Button onClick={() => {
+        <button onClick={() => {
             signInWithPopup(auth, provider)
                 .then((result) => {
                     dispatch(updateUser());
@@ -23,19 +22,19 @@ function GoogleLoginButton() {
                 });
         }}>
             Google Login
-        </Button>
+        </button>
     );
 }
 
 function LogoutButton() {
     const dispatch = useDispatch();
     return (
-        <Button onClick={() => {
+        <button onClick={() => {
             signOut(auth);
             dispatch(resetUser());
         }}>
             Log out
-        </Button>
+        </button>
     );
 }
 

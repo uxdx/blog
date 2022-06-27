@@ -2,6 +2,7 @@ import { RootState } from "../../service/AuthStore";
 import { useSelector } from 'react-redux'
 import { GoogleLoginButton, LogoutButton } from './../../service/Auth';
 import Sidebar from "./Sidebar";
+import MarkdwonViewer from "../../service/MarkdownViewer";
 
 function Body() {
     const user = useSelector((state: RootState) => state.user);
@@ -13,6 +14,7 @@ function Body() {
                 <h4>{user.email}</h4>
                 <LogoutButton />
                 <GoogleLoginButton />
+                <MarkdwonViewer md="# Hello, *world*!"/>
             </div>
             <Sidebar/>
         </div>
