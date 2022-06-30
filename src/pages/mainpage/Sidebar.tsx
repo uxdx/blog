@@ -1,7 +1,7 @@
 
 function Sidebar() {
     return (
-        <div className="main-sidebar elevation-8">
+        <aside className="main-sidebar elevation-8">
             <ul>
                 <li><HeaderItem text="Header"/></li>
                 <li><Item text="Item 1"/></li>
@@ -10,7 +10,7 @@ function Sidebar() {
                 <li><Item text="Item 4"/></li>
             </ul>
             
-        </div>
+        </aside>
     );
 }
 
