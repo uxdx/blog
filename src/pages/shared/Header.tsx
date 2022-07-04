@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { theme } from "../../Settings";
 import { header_height } from "../style/size";
 
-function Header() {
-    const StyledHeader = styled.header`
+const StyledHeader = styled.header`
     display: flex;
     // justify-content: center;
     align-items: center;
@@ -19,6 +18,8 @@ function Header() {
         font-weight: 600;
     }
     `
+function Header() {
+    
     return (
         <StyledHeader>
             <span className="header-logo">

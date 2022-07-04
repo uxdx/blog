@@ -6,8 +6,9 @@ import { Post } from "../../type";
 import { theme } from "../../Settings";
 import { header_height, sidebar_width } from '../style/size';
 
-function Sidebar() {
-    const StyledSidebar = styled.aside`
+
+
+const StyledSidebar = styled.aside`
     background-color: ${theme.primary};
     color: ${theme.on_p};
     margin-top: ${header_height};
@@ -25,6 +26,8 @@ function Sidebar() {
         }
     }
     `
+function Sidebar() {
+    
     
     return (
         <StyledSidebar className="sidebar elevation-8">
@@ -58,9 +61,7 @@ function PopularPosts(){
         </ul>  
     );
 }
-
-function HeaderItem(props: { text: string }) {
-    const StyledHeaderItem = styled.li`
+const StyledHeaderItem = styled.li`
     width: ${sidebar_width};
     div{
         padding: 12px 24px;
@@ -72,6 +73,8 @@ function HeaderItem(props: { text: string }) {
     }
     
     `
+function HeaderItem(props: { text: string }) {
+    
     return (
         <StyledHeaderItem>
             <div>
@@ -80,9 +83,7 @@ function HeaderItem(props: { text: string }) {
         </StyledHeaderItem>
     );
 }
-
-function Item(props: { text: string, to: string }) {
-    const StyledItem = styled.li`
+const StyledItem = styled.li`
     width: ${sidebar_width};
     a{
         display: inline-block;
@@ -98,6 +99,8 @@ function Item(props: { text: string, to: string }) {
     }
     
     `
+function Item(props: { text: string, to: string }) {
+    
     return (
         <StyledItem>
             <Link className="sidebar-item" to={props.to}>

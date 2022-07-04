@@ -2,12 +2,12 @@ import styled from 'styled-components'
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
 import { theme } from '../Settings';
-// import "../scss/MainPage.scss";
 import { useEffect, useState } from 'react';
 import { Post } from '../type';
 import { Link } from 'react-router-dom';
 import { header_height } from './style/size';
 import { getRecentPosts } from '../service/DB';
+import { LoadingCircle, ScreenAdaptable, WithMediaQuery } from './shared/Util';
 
 function MainPage() {
     return (
@@ -19,8 +19,7 @@ function MainPage() {
     )
 }
 
-function Body() {
-    const StyledDiv = styled.div`
+const StyledBody = styled.div`
     display: flex;
     justify-content: space-between;
     background-color: ${theme.primary};
@@ -28,29 +27,30 @@ function Body() {
     width: 100%;
     padding-top: ${header_height};
     `
+function Body() {
+    
     return (
-        <StyledDiv>
-            <LeftSide/>
+        <StyledBody>
             <MainContents/>
-            <RightSide/>
-        </StyledDiv>
+        </StyledBody>
     );
 }
 
-
-function MainContents() {
-    const StyledMain = styled.main`
+const StyledMain = styled.main`
     width: 100%;
     .content{
-        background-color: ${theme.p_light};
+        background-color: ${theme.primary};
+        width: 90%;
         height: 450px;
-        margin:40px 40px;
-        padding: 40px;
+        margin:40px auto;
+        padding: 0 20px;
         border-radius: 25px;
-        border: 2px solid ${theme.p_light};
-        
+        // border: 2px solid ${theme.p_light};
+        text-align: center;
     }
     `
+function MainContents() {
+    
     return (
         <StyledMain>
             <RecentPosts/>
@@ -59,63 +59,134 @@ function MainContents() {
     );
 }
 
+const PostViewer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    `
+const CardContainer = styled.div`
+    display: flex;
+    width: 100%;
+    `
+const ViewerButton = styled.button`
+    top: 50%;
+    width: auto;
+    height: 48px;
+    margin: auto, 0;
+    .material-symbols-outlined{
+        font-size: 48px !important;
+    }
+    `
 function RecentPosts() {
     const [recentPosts, setRecentPosts] = useState<Post[]>([]);
+    let [pointer, setPointer] = useState<number>(0); // 배열의 시작 인덱스 state
+    let [pointer_max, setMax] = useState<number>(0); // 포인터의 최댓값(배열 크기)
+
     // 처음 렌더링 될 때 초기화
     useEffect(() => {
         getRecentPosts(10).then((results) => {
+            setMax(results.length);
             setRecentPosts(results);
         });
     }, []);
     return (
         <div className='content elevation-5'>
-            Recent Posts
-            {recentPosts.map((post) => {
-                return <PostCard text={post.title} to={"/posts/" + post.id.toString()} />
-            })}
+            <h1>Recent Posts</h1>
+            {recentPosts.length === 0 ? <LoadingCircle /> :
+                <PostViewer>
+                    <WithMediaQuery query='(min-width: 767px)' child={
+                        <ViewerButton onClick={() => {
+                            if (pointer > 0) {
+                                setPointer(pointer - 1);
+                            }
+                            }}>
+                            <span className="material-symbols-outlined">
+                                arrow_circle_left
+                            </span>
+                        </ViewerButton>
+                    }/>
+                    <CardContainer>
+                        {recentPosts.slice(pointer, pointer + 3).map((post) => {
+                            return <PostCard post={post} key={ post.id } />
+                        })}
+                    </CardContainer>
+                    <WithMediaQuery query='(min-width: 767px)' child={
+                        <ViewerButton onClick={() => {
+                            if (pointer < pointer_max) {
+                                setPointer(pointer + 1);
+                            }
+                        }}>
+                            <span className="material-symbols-outlined">
+                                arrow_circle_right
+                            </span>
+                        </ViewerButton>
+                    } />
+                    
+                </PostViewer>
+            }
         </div>
     );
 }
 
-function LeftSide() {
-    const StyledAside = styled.aside`
-    width: 220px;
-    @media (max-width: 1024px) {
-        display:none;
+const StyledPostCard = styled.div`
+    background-color: ${theme.p_light};
+    color: ${theme.on_p};
+    display:flex;
+    flex-direction: column;
+    flex: 1;
+    height: 350px;
+    margin: 0 10px;
+    border: 1px solid ${theme.p_light};
+    border-radius: 12px;
+    text-align: start;
+    h2 {
+        flex: 1;
+        color: #fff;
+        font-size:1.2rem;
+        padding-left: 20px;
     }
-}
-    `
-    return (
-        <StyledAside>
-            Left
-        </StyledAside>
-    );
-}
-
-function RightSide() {
-    const StyledAside = styled.aside`
-    width: 220px;
-    @media (max-width: 767px) {
-        display:none;
+    .card-content-wrapper{
+        flex: 6;
+        overflow: hidden;
+        padding: 20px;
+        border-bottom: 1px solid #444;
+        p{
+            overflow: hidden;
+            height: 100%;
+            overflow-wrap: anywhere;
+        }
+    }
+    .card-meta-wrapper{
+        flex:1;
+        span{
+            display: inline-block;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
     }
     `
-    return (
-        <StyledAside>
-            Right
-        </StyledAside>
-    );
-}
-
-
-function PostCard(props: { text: string, to:string }) {
-    const StyledPostCard = styled.div`
+function PostCard(props: { post: Post }) {
     
-    `
+    
     return (
         <StyledPostCard>
-            <Link to={props.to}>
-            {props.text}
+            <Link to={"/posts/"+props.post.id}>
+                <h2>
+                    {props.post.title}
+                </h2>
             </Link>
+            <div className='card-content-wrapper'>
+                <Link to={"/posts/" + props.post.id}>
+                    <p>
+                    {props.post.md}
+                    </p>
+                </Link>
+            </div>
+            <div className='card-meta-wrapper'>
+                <span>
+                    {props.post.uploadDate.toDate().toDateString()}
+                </span>
+            </div>
         </StyledPostCard>
     );
 }
