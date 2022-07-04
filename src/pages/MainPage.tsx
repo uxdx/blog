@@ -7,15 +7,17 @@ import { Post } from '../type';
 import { Link } from 'react-router-dom';
 import { header_height } from './style/size';
 import { getRecentPosts } from '../service/DB';
-import { LoadingCircle, ScreenAdaptable, WithMediaQuery } from './shared/Util';
+import { LoadingCircle, ScreenAdaptable, WithMediaQuery } from '../service/Util';
 
 function MainPage() {
     return (
-        <>
+        <div onTouchStart={(e) => {
+            console.log(e);
+        }} >
             <Header />
             <Body/>
             <Footer/>
-        </>
+        </div>
     )
 }
 
@@ -45,8 +47,11 @@ const StyledMain = styled.main`
         margin:40px auto;
         padding: 0 20px;
         border-radius: 25px;
-        // border: 2px solid ${theme.p_light};
         text-align: center;
+        .content-head{
+            display: inline-block;
+            border-bottom: 3px solid ${theme.secondary};
+        }
     }
     `
 function MainContents() {
@@ -75,7 +80,11 @@ const ViewerButton = styled.button`
     margin: auto, 0;
     .material-symbols-outlined{
         font-size: 48px !important;
+        :hover{
+            opacity: 0.6;
+        }
     }
+
     `
 function RecentPosts() {
     const [recentPosts, setRecentPosts] = useState<Post[]>([]);
@@ -91,7 +100,7 @@ function RecentPosts() {
     }, []);
     return (
         <div className='content elevation-5'>
-            <h1>Recent Posts</h1>
+            <h1 className='content-head'>Recent Posts</h1>
             {recentPosts.length === 0 ? <LoadingCircle /> :
                 <PostViewer>
                     <WithMediaQuery query='(min-width: 767px)' child={

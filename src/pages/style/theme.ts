@@ -3,10 +3,10 @@ const dark_theme = {
     p_light: "#232323",
     p_dark: "#1b1b1b",
     on_p: "#fafafa",
-    secondary: "#3f51b5",
-    s_light: "#757de8",
-    s_dark: "#002984",
-    on_s: "#f1f8e9"
+    secondary: "#4a148c",
+    s_light: "#7c43bd",
+    s_dark: "#12005e",
+    on_s: "#fff"
 }
 
 export { dark_theme };
