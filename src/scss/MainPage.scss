@@ -1,0 +1,27 @@
+@import "Variables.scss";
+@import "Elevations.scss";
+@import "Header.scss";
+@import "Sidebar.scss";
+@import "Footer.scss";
+
+body{
+    margin: 0;
+}
+
+
+.main-body{
+    background-color: $primary;
+    color: $on-p;
+    height: 900px;
+    display: flex;
+    // align-items:center;
+    
+}
+.main-contents{
+    margin-top: $header-height;
+    max-width: 900px;
+    padding: 20px;
+    // flex의 남은 공간만큼 넓어짐
+    flex-grow: 1;
+    min-height: 100%;
+}

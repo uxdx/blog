@@ -6,7 +6,7 @@ import Sidebar from "./shared/Sidebar";
 import MarkdwonViewer from "../service/MarkdownViewer";
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
-import "./scss/MainPage.scss";
+import "../scss/MainPage.scss";
 function MainPage() {
 
     return (

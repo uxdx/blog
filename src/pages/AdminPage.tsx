@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./scss/AdminPage.scss";
+import "../scss/AdminPage.scss";
 import PostsSetting from "./adminpage/PostsSetting";
 
 function AdminPage(){

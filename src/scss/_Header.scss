@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary;
+    color: $on-p;
+    z-index: 1;
+    height: $header-height;
+    width: 100%;
+    position: fixed;
+    .header-logo{
+        font-size: 28px;
+        font-weight: 600;
+    }
+}
