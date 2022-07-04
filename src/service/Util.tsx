@@ -74,18 +74,18 @@ const StyledCircle = styled.span`
         transform: rotate(360deg);
       }
     }
-    -webkit-animation: rotating 2s linear infinite;
-    -moz-animation: rotating 2s linear infinite;
-    -ms-animation: rotating 2s linear infinite;
-    -o-animation: rotating 2s linear infinite;
-    animation: rotating 2s linear infinite;
+    -webkit-animation: rotating 0.5s linear infinite;
+    -moz-animation: rotating 0.5s linear infinite;
+    -ms-animation: rotating 0.5s linear infinite;
+    -o-animation: rotating 0.5s linear infinite;
+    animation: rotating 0.5s linear infinite;
     // other Styles
     font-size: 48px;
     `
 function LoadingCircle() {
     
     return (
-        <StyledCircle className="material-symbols-outlined">
+        <StyledCircle className="material-symbols-outlined loading">
             refresh
         </StyledCircle>
     );

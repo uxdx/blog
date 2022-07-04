@@ -52,6 +52,9 @@ const StyledMain = styled.main`
             display: inline-block;
             border-bottom: 3px solid ${theme.secondary};
         }
+        .loading{
+            display: block;
+        }
     }
     `
 function MainContents() {
