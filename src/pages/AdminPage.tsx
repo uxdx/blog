@@ -2,12 +2,25 @@ import { ReactNode, useState } from "react";
 import { theme } from "../Settings";
 import styled from "styled-components";
 import MDEditor from '@uiw/react-md-editor';
+import DatePicker from "react-datepicker";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import ko from 'date-fns/locale/ko';
+import "react-datepicker/dist/react-datepicker.css";
+import { uploadPost } from "../service/DB";
+import { Post } from "../type";
+import { Timestamp } from "firebase/firestore/lite";
+
+registerLocale('ko', ko);
 
 const Admin = styled.div`
 display: flex;
 background-color: ${theme.primary};
 color: ${theme.on_p};
 min-height: 1000px;
+
+div{
+
+}
 `
 const MenuBar = styled.div`
 background-color: ${theme.p_light};
@@ -25,6 +38,10 @@ width: 220px;
 }
 `
 const Page = styled.div`
+display: flex;
+flex-direction: column;
+align-items:center;
+width: 100%;
 `
 
 function AdminPage(){
@@ -33,7 +50,7 @@ function AdminPage(){
         <Admin>
             <MenuBar>
                 <div className="menu-item" onClick={()=>{
-                    setPage(<NewPostPage/>);
+                    setPage(<CreateNewPostPage />);
                 }}>
                     {/* 글쓰기 */}
                     <span className="material-symbols-outlined icon">
@@ -60,17 +77,60 @@ function AdminPage(){
         </Admin>
     );
 }
+const NewPost = styled.div`
+width: 90%;
+margin-top: 50px;
+.editor-wrapper{
+    margin-top: 25px;
+    display: flex;
+    div{
+        flex:1;
+        margin-right: 15px;
+    }
+}
 
-function NewPostPage(){
+`
+function CreateNewPostPage() {
+    const [startDate, setStartDate] = useState(new Date());
     const [value, setValue] = useState<string | undefined>("**Hello world!!!**");
+    function submit() {
+        console.log(value);
+    }
     return(
-        <div>
-            <MDEditor
-                value={value}
-                onChange={setValue}
+        <NewPost>
+            <DatePicker
+                    locale="ko"
+                    selected={startDate}
+                    onChange={(date: Date) => {
+                        setStartDate(date);
+                        console.log(date);
+                    }}
+                showTimeSelect
             />
-            <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} />
-        </div>
+            <div className="editor-wrapper">
+                <MDEditor
+                    value={value}
+                    onChange={setValue}
+                    height={300}
+                />
+                <MDEditor.Markdown
+                    source={value}
+                    style={{ whiteSpace: 'pre-wrap' }}
+                />
+            </div>
+            <button onClick={async () => {
+                // const sample: Post = {
+                //     id: "4",
+                //     uploadDate: Timestamp.now(),
+                //     title: "sample post",
+                //     md: "sample content"
+
+                // }
+                // await uploadPost(sample);
+            }}>
+                게시
+            </button>
+        </NewPost>
     );
 }
 

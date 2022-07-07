@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, Firestore, DocumentData, query, where, orderBy, limit } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, Firestore, DocumentData, query, where, orderBy, limit, setDoc, doc, addDoc } from 'firebase/firestore/lite';
 import { getStorage, ref, getDownloadURL  } from "firebase/storage";
 import { DocumentDataToPost, Post } from '../type';
 import app from "./Firebase";
@@ -37,7 +37,12 @@ async function getImage(path:string) {
 
     return url;
 }
+async function uploadPost(post: Post){
+    await addDoc(posts, post).then(() => {
+        console.log('succeed');
+        return true;
+    });
+}
 
 
-
-export { getPostsAll, getImage, getRecentPosts, getPostById };
+export { getPostsAll, getImage, getRecentPosts, getPostById, uploadPost };
