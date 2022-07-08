@@ -25,15 +25,17 @@ div{
 const MenuBar = styled.div`
 background-color: ${theme.p_light};
 color: ${theme.on_p};
-width: 220px;
+width: 240px;
 .menu-item{
-    height: 60px;
+    width: 192px;
+    height: 40px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 0 24px;
     cursor: pointer;
     .icon{
-        font-size: 32px;
+        font-size: 24px;
+        margin-right: 24px;
     }
 }
 `

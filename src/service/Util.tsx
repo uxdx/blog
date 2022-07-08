@@ -45,7 +45,7 @@ function useMediaQuery(query:string) {
 
     return matches;
 }
-const StyledCircle = styled.span`
+const StyledCircle = styled.div`
     @-webkit-keyframes rotating /* Safari and Chrome */ {
     from {
       transform: rotate(0deg);
@@ -69,8 +69,10 @@ const StyledCircle = styled.span`
 function LoadingCircle() {
     
     return (
-        <StyledCircle className="material-symbols-outlined loading">
-            refresh
+        <StyledCircle>
+            <span className="material-symbols-outlined loading">
+                refresh
+            </span>
         </StyledCircle>
     );
 }
