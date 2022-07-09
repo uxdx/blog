@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import { getCurrentUser } from './Auth';
 
 interface userInterface {
@@ -8,7 +9,7 @@ interface userInterface {
 
 const userInitialState = { displayName: 'Anonymous', email: '' } as userInterface;
 
-let user = createSlice({
+const user = createSlice({
     name: 'user',
     initialState: userInitialState,
     reducers: {
@@ -24,13 +25,29 @@ let user = createSlice({
     }
 });
 
+const loginModal = createSlice({
+    name: 'loginModal',
+    initialState: false,
+    reducers: {
+        loginModalOpen(){
+            return true;
+        },
+        loginModalClose(){
+            return false;
+        }
+    }
+})
+
+
 
 export const store = configureStore({
     reducer: {
-        user: user.reducer
+        user: user.reducer,
+        loginModal: loginModal.reducer
     }
 }) 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
-
+export type AppDispatch = typeof store.dispatch
 export let { updateUser, resetUser } = user.actions;
+export let { loginModalOpen, loginModalClose } = loginModal.actions;

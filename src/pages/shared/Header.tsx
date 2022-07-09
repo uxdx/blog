@@ -1,5 +1,8 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { AppDispatch, loginModalOpen } from "../../service/store";
 import { theme } from "../../Settings";
 import { header_height } from "../style/size";
 
@@ -21,8 +24,10 @@ const StyledHeader = styled.header`
         border-radius: 30px;
         border-bottom: 1px solid #000;
     }
-    `
+`
 function Header() {
+    const dispatch: AppDispatch = useDispatch()
+    
     return (
         <StyledHeader>
             <span className="header-logo">
@@ -30,9 +35,16 @@ function Header() {
                     Harusary.com
                 </Link>
             </span>
+            <span className="header-auth">
+                <button onClick={()=>dispatch(loginModalOpen())}>
+                    Login
+                </button>
+            </span>
         </StyledHeader>
     );
 }
+
+
 
 
 export default Header;
