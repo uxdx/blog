@@ -9,4 +9,13 @@ const dark_theme = {
     on_s: "#fff"
 }
 
-export { dark_theme };
+const mixins = {
+    // admin page border 
+    mdeditor_border: () => `
+        background-color: #0d1117;
+        border-radius   : 3px;
+        box-shadow: 0 0 0 1px #30363d, 0 0 0 #30363d, 0 1px 1px #30363d;
+    `
+}
+
+export { dark_theme, mixins };
