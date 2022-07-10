@@ -76,6 +76,7 @@ height: 500px;
     .icon-button{
         width: 44px;
         padding: 30px 0;
+        cursor: pointer;
         img{
             max-width: 100%;
             max-height: 100%;

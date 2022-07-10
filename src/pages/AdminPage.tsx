@@ -1,18 +1,14 @@
+import * as React from 'react';
 import { ReactNode, useState } from "react";
 import { theme } from "../Settings";
 import styled from "styled-components";
 import MDEditor from '@uiw/react-md-editor';
-import DatePicker from "react-datepicker";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
-import ko from 'date-fns/locale/ko';
-import "react-datepicker/dist/react-datepicker.css";
-import { uploadPost } from "../service/DB";
-import { Post } from "../type";
-import { Timestamp } from "firebase/firestore/lite";
-import { sub } from "date-fns";
 import { mixins } from "./style/theme";
-
-registerLocale('ko', ko);
+import TextField from '@mui/material/TextField';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import LocalizedDatePicker from './shared/Datepicker';
 
 const Admin = styled.div`
 display: flex;
@@ -114,12 +110,17 @@ align-items: right;
     height: 50px;
     padding: 5px 15px;
     font-size: 13px;
+    span{
+        font-size: 1.05rem;
+        font-weight: bold;
+    }
     textarea{
         background-color: #232323;
         color: inherit;
         flex: 1;
         height:25px;
         margin-left: 10px;
+        padding: 10px 0 0 10px;
         font-size:16px;
     }
 }
@@ -132,10 +133,11 @@ align-items: right;
     height: 25px;
     margin: 10px 0 0 auto;
     font-size: 13px;
+    font-weight: bold;
 }
 `
 function CreateNewPostPage() {
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = React.useState<Date | null>(new Date());
     const [title, setTitle] = useState<string>('');
     const [value, setValue] = useState<string | undefined>("**Hello world!!!**");
     function submit() {
@@ -145,15 +147,7 @@ function CreateNewPostPage() {
     }
     return(
         <NewPost>
-            <DatePicker
-                    locale="ko"
-                    selected={startDate}
-                    onChange={(date: Date) => {
-                        setStartDate(date);
-                        console.log(date);
-                    }}
-                showTimeSelect
-            />
+            <LocalizedDatePicker/>
             <div className="title">
                 <span>
                     제목:

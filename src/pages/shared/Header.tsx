@@ -8,7 +8,7 @@ import { header_height } from "../style/size";
 
 const StyledHeader = styled.header`
     display: flex;
-    // justify-content: center;
+    justify-content: space-between;
     align-items: center;
     color: ${theme.on_p};
     height: ${header_height};
@@ -19,10 +19,27 @@ const StyledHeader = styled.header`
         font-size: 24px;
         font-weight: 600;
         padding: 8px 13px 15px;
-        margin-top: 20px;
-        margin-left: 48px;
+        margin-left: 24px;
         border-radius: 30px;
         border-bottom: 1px solid #000;
+    }
+    .header-auth{
+        width: 80px;
+        height: 40px;
+        border-radius: 20px;
+        text-align: center;
+        background-color: #eee;
+        color: #000;
+        margin-right: 48px;
+        cursor: pointer;
+        :hover{
+            background-color: grey;
+        }
+        .button-text{
+            display: inline;
+            vertical-align: -webkit-baseline-middle;
+            font-weight: bold;
+        }
     }
 `
 function Header() {
@@ -35,11 +52,11 @@ function Header() {
                     Harusary.com
                 </Link>
             </span>
-            <span className="header-auth">
-                <button onClick={()=>dispatch(loginModalOpen())}>
-                    Login
-                </button>
-            </span>
+            <div className="header-auth" onClick={() => dispatch(loginModalOpen())}>
+                <span className="button-text">
+                    로그인
+                </span>
+            </div>
         </StyledHeader>
     );
 }
