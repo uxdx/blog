@@ -2,13 +2,12 @@ import * as React from 'react';
 import { ReactNode, useState } from "react";
 import { theme } from "../Settings";
 import styled from "styled-components";
-import MDEditor from '@uiw/react-md-editor';
 import { mixins } from "./style/theme";
-import TextField from '@mui/material/TextField';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import LocalizedDatePicker from './shared/Datepicker';
+import { useQuill } from 'react-quilljs';
+// or const { useQuill } = require('react-quilljs');
+import 'quill/dist/quill.snow.css'; // Add css for snow theme
+import TextEditor from './shared/Texteditor';
 
 const Admin = styled.div`
 display: flex;
@@ -157,12 +156,9 @@ function CreateNewPostPage() {
                 </textarea>
             </div>
             <div className="editor-wrapper">
-                <MDEditor
-                    value={value}
-                    onChange={setValue}
-                    height={300}
-                />
+                <TextEditor contentHook={setValue}/>
             </div>
+            {value}
             <button className="submit" onClick={submit}>
                 게시
             </button>

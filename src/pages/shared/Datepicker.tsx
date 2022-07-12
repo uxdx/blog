@@ -9,18 +9,18 @@ import { theme } from '../../Settings';
 
 const CustomDatePicker = styled.div`
 .MuiOutlinedInput-root{
+    border-radius: 4px; 
+    border: 2px groove grey;
     color: #eee;
     background-color: #0d1117;
-    fieldset{
-        border-radius: 4px; 
-        border: 2px groove grey;
-    }
-    // &:hover{
-    //     border-color: ${theme.secondary};
-    // }
-
-    &.Mui-focused fieldset{
+    &:hover {
         border-color: ${theme.secondary};
+    }
+    fieldset{
+        border: none;
+    }
+    button{
+        color: #eee;
     }
 }
 `
@@ -39,7 +39,7 @@ export default function LocalizedDatePicker() {
                 <DateTimePicker
                     value={datePickerValue}
                     onChange={(newValue) => setDatePickerValue(newValue)}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => <TextField {...params}/>}
                 />
             </LocalizationProvider>
         </CustomDatePicker>
